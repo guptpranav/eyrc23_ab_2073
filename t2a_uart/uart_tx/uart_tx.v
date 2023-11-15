@@ -34,6 +34,67 @@ initial begin
 	tx = 0;
 end
 
+parameter START=0, DATA=1, STOP=2, IDLE=3;
+
+reg [2:0] current_state = START;
+reg [21:0] counter = 0;
+reg [4:0] idx = 0;
+
+always @(posedge clk_50M) begin
+	case(current_state)
+		START: begin
+			if(data) begin
+				if(counter<433) begin
+					tx <= 0;
+					counter = counter+1;
+				end else begin
+					current_state <= DATA;
+					counter <= 0;
+				end
+			end else begin 
+				tx = 1;
+				current_state <= IDLE;
+			end
+		end
+		DATA: begin
+			if(idx<8) begin
+				if(counter<433) begin
+					tx <= data[idx];
+					counter <= counter+1;
+				end else begin
+					idx <= idx+1;
+					counter <= 0;
+				end
+			end else begin
+				tx <= 1;
+				current_state <= STOP;
+				counter <= 0;
+				idx <= 0;
+			end
+		end
+		STOP: begin
+			if(counter<432) begin
+				tx <= 1;
+				counter <= counter+1;
+			end else if(data) begin
+				current_state <= START;
+				counter <= 0;
+			end else begin
+				current_state <= IDLE;
+				counter <= 0;
+			end
+		end
+		IDLE: begin
+			if(!data) begin
+				tx<=1;
+			end else begin
+				tx <= 0;
+				current_state <= START;
+			end
+		end
+	endcase
+end
+
 //////////////////DO NOT MAKE ANY CHANGES BELOW THIS LINE//////////////////
 
 endmodule
