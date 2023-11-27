@@ -1,0 +1,167 @@
+
+.temp.file.elf:     file format elf32-littleriscv
+
+SYMBOL TABLE:
+00000000 l    d  .init	00000000 .init
+00000054 l    d  .text	00000000 .text
+02000000 l    d  .data	00000000 .data
+02000000 l    d  .bss	00000000 .bss
+02000000 l    d  .stack	00000000 .stack
+00000000 l    d  .riscv.attributes	00000000 .riscv.attributes
+00000000 l    d  .comment	00000000 .comment
+00000000 l    d  .debug_aranges	00000000 .debug_aranges
+00000000 l    d  .debug_info	00000000 .debug_info
+00000000 l    d  .debug_abbrev	00000000 .debug_abbrev
+00000000 l    d  .debug_line	00000000 .debug_line
+00000000 l    d  .debug_str	00000000 .debug_str
+00000000 l    d  .debug_loc	00000000 .debug_loc
+00000000 l    d  .debug_ranges	00000000 .debug_ranges
+00000000 l    d  .debug_frame	00000000 .debug_frame
+00000000 l    d  .debug_macro	00000000 .debug_macro
+00000000 l    df *ABS*	00000000 tls.c
+00000000 l    df *ABS*	00000000 
+000000ad l       .debug_info	00000000 
+000000ad l       .debug_info	00000000 
+000000ad l       .debug_info	00000000 
+000000ad l       .debug_info	00000000 
+000000ad l       .debug_info	00000000 
+000000ad l       .debug_info	00000000 
+000000ad l       .debug_info	00000000 
+000000ad l       .debug_info	00000000 
+000000ad l       .debug_info	00000000 
+000000ad l       .debug_info	00000000 
+000000ad l       .debug_info	00000000 
+000000ad l       .debug_info	00000000 
+000000ad l       .debug_info	00000000 
+000000ad l       .debug_info	00000000 
+000000ad l       .debug_info	00000000 
+000000ad l       .debug_info	00000000 
+000000ad l       .debug_info	00000000 
+000000ad l       .debug_info	00000000 
+000000ad l       .debug_info	00000000 
+000000ad l       .debug_info	00000000 
+000000ad l       .debug_info	00000000 
+00000000 g       *ABS*	00000000 __data_size
+02000800 g       .data	00000000 __global_pointer$
+02000000 g       .bss	00000000 __tls_base
+00000800 g       *ABS*	00000000 __flash_size
+00000040 g       *ABS*	00000000 __stack_size
+00000000 g       *ABS*	00000000 __bss_size
+000000b4 g     F .text	00000024 memcpy
+02000000 g       .bss	00000000 __bss_end
+00000000 g       *ABS*	00000000 __tbss_size
+000000ac g     F .text	00000008 _set_tls
+000000ad  w      .debug_info	00000000 .hidden t2b_ex2.c.eb4ef065
+00000000 g     F .init	00000000 _start
+02000000 g       *ABS*	00000000 __ram
+02000000 g       .bss	00000000 __data_end
+000000f4 g       .text	00000000 __text_end
+02000000 g       .bss	00000000 __bss_start
+000000d8 g     F .text	0000001c memset
+00000054 g     F .text	00000058 main
+00000100 g       *ABS*	00000000 __ram_size
+02000100 g       .init	00000000 __stack
+00000000 g     F *ABS*	00000000 vfscanf
+000000f8 g       *ABS*	00000000 __data_source
+00000000 g       *ABS*	00000000 __flash
+02000000 g       .data	00000000 __data_start
+00000000 g     F *ABS*	00000000 vfprintf
+
+
+
+Disassembly of section .init:
+
+00000000 <_start>:
+   0:	    02000117          	auipc	x2,0x2000
+   4:	    10010113          	addi	x2,x2,256 # 2000100 <__stack>
+   8:	    02000197          	auipc	x3,0x2000
+   c:	    7f818193          	addi	x3,x3,2040 # 2000800 <__global_pointer$>
+  10:	    02000517          	auipc	x10,0x2000
+  14:	    ff050513          	addi	x10,x10,-16 # 2000000 <__bss_end>
+  18:	    0f800593          	addi	x11,x0,248
+  1c:	    00000613          	addi	x12,x0,0
+  20:	    094000ef          	jal	x1,b4 <memcpy>
+  24:	    02000517          	auipc	x10,0x2000
+  28:	    fdc50513          	addi	x10,x10,-36 # 2000000 <__bss_end>
+  2c:	    00000593          	addi	x11,x0,0
+  30:	    00000613          	addi	x12,x0,0
+  34:	    0a4000ef          	jal	x1,d8 <memset>
+  38:	    02000517          	auipc	x10,0x2000
+  3c:	    fc850513          	addi	x10,x10,-56 # 2000000 <__bss_end>
+  40:	    06c000ef          	jal	x1,ac <_set_tls>
+  44:	    00000513          	addi	x10,x0,0
+  48:	    00000593          	addi	x11,x0,0
+  4c:	    008000ef          	jal	x1,54 <main>
+  50:	/-- 0000006f          	jal	x0,50 <__stack_size+0x10>
+
+Disassembly of section .text:
+
+00000054 <main>:
+     ###         // for c simulation
+     ###         _put_str("\n");
+     ###     }
+     ### 
+     ###     // function call
+     ###     generate_ap_series(A, D, N);
+  54:	       02000737          	lui	x14,0x2000
+  58:	       00074783          	lbu	x15,0(x14) # 2000000 <__bss_end>
+  5c:	       00474603          	lbu	x12,4(x14)
+  60:	       00874683          	lbu	x13,8(x14)
+  64:	       0ff7f793          	andi	x15,x15,255
+  68:	       0ff67613          	andi	x12,x12,255
+  6c:	       0ff6f693          	andi	x13,x13,255
+     ###         for (uint8_t i = 0; i < n; i++) {
+  70:	       00000713          	addi	x14,x0,0
+     ###             CPU_DATA = a + i * d;
+  74:	       020005b7          	lui	x11,0x2000
+     ###         for (uint8_t i = 0; i < n; i++) {
+  78:	/--/-X 00e69c63          	bne	x13,x14,90 <main+0x3c>
+     ### 
+     ###     // flag indicating program execution is complete
+     ###     CPU_DONE = 1;
+  7c:	|  |   020007b7          	lui	x15,0x2000
+  80:	|  |   00100713          	addi	x14,x0,1
+  84:	|  |   00e78823          	sb	x14,16(x15) # 2000010 <__bss_end+0x10>
+     ### 
+     ###     return 0;
+  88:	|  |   00000513          	addi	x10,x0,0
+  8c:	|  |   00008067          	jalr	x0,0(x1)
+     ###             CPU_DATA = a + i * d;
+  90:	|  \-> 00f58623          	sb	x15,12(x11) # 200000c <__bss_end+0xc>
+     ###         for (uint8_t i = 0; i < n; i++) {
+  94:	|      00170713          	addi	x14,x14,1
+  98:	|      00f607b3          	add	x15,x12,x15
+     ###             _put_value(CPU_DATA);
+  9c:	|      00c5c503          	lbu	x10,12(x11)
+     ###         for (uint8_t i = 0; i < n; i++) {
+  a0:	|      0ff77713          	andi	x14,x14,255
+  a4:	|      0ff7f793          	andi	x15,x15,255
+  a8:	\----- fd1ff06f          	jal	x0,78 <main+0x24>
+
+000000ac <_set_tls>:
+  ac:	00050213          	addi	x4,x10,0
+  b0:	00008067          	jalr	x0,0(x1)
+
+000000b4 <memcpy>:
+  b4:	       00050313          	addi	x6,x10,0
+  b8:	/----- 00060e63          	beq	x12,x0,d4 <memcpy+0x20>
+  bc:	|  /-> 00058383          	lb	x7,0(x11)
+  c0:	|  |   00730023          	sb	x7,0(x6)
+  c4:	|  |   fff60613          	addi	x12,x12,-1
+  c8:	|  |   00130313          	addi	x6,x6,1
+  cc:	|  |   00158593          	addi	x11,x11,1
+  d0:	|  \-- fe0616e3          	bne	x12,x0,bc <memcpy+0x8>
+  d4:	\----> 00008067          	jalr	x0,0(x1)
+
+000000d8 <memset>:
+  d8:	       00050313          	addi	x6,x10,0
+  dc:	/----- 00060a63          	beq	x12,x0,f0 <memset+0x18>
+  e0:	|  /-> 00b30023          	sb	x11,0(x6)
+  e4:	|  |   fff60613          	addi	x12,x12,-1
+  e8:	|  |   00130313          	addi	x6,x6,1
+  ec:	|  \-- fe061ae3          	bne	x12,x0,e0 <memset+0x8>
+  f0:	\----> 00008067          	jalr	x0,0(x1)
+
+000000f4 <__text_end>:
+  f4:	0000                	c.unimp
+	...

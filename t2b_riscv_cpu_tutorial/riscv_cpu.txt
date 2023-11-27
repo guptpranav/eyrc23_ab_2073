@@ -1,0 +1,25 @@
+RISC-V CPU Implementation from MIPS
+
+Main Building Blocks
+
+t2b_riscv_cpu_tutorial (Will be Given by us)
+    - riscv_single_cycle (will be given by us)
+
+        - controller (block diagram)
+            - main_decoder - lot of changes
+            - alu_decoder  - similar to MIPS32
+
+        - datapath (block diagram)
+            - reset_ff          (no change)
+            - adder             (no change)
+            - mux2              (no change)
+            - mux3              (new module) - easy
+            - mux4              (new module) - easy
+            - reg_file          (no change)
+            - sign_ext          (major changes)
+            - alu               (minimum changes)
+            - sign_zero_extend  (new module) - challenging -
+            - store_extend      (new module) - easy but they need to know logic
+
+    - instr_mem (no change)
+    - data_mem  (no change)
